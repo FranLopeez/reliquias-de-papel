@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Libros{% endblock %}
+
+{% block content %}
+    <h1>Libros</h1>
+
+    <form method="get">
+        <input type="text" name="q" placeholder="Buscar por título o autor" value="{{ current_query }}">
+        <select name="genre">
+            <option value="">Todos los géneros</option>
+            {% for genre in genres %}
+                <option value="{{ genre }}" {% if genre == current_genre %}selected{% endif %}>{{ genre }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <ul>
+        {% for book in books %}
+            <li><a href="{% url 'books:detail' book.pk %}">{{ book.title }}</a> — {{ book.author }} ({{ book.genre }})</li>
+        {% empty %}
+            <li>No se encontraron libros.</li>
+        {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+        <div>
+            {% if page_obj.has_previous %}
+                <a href="?q={{ current_query }}&genre={{ current_genre }}&page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% endif %}
+            <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?q={{ current_query }}&genre={{ current_genre }}&page={{ page_obj.next_page_number }}">Siguiente</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

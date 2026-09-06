@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Mi perfil{% endblock %}
+
+{% block content %}
+    <h1>Mi perfil</h1>
+    <p><strong>Usuario:</strong> {{ profile.user.username }}</p>
+    <p><strong>Email:</strong> {{ profile.user.email }}</p>
+    <p><strong>Bio:</strong> {{ profile.bio|default:"Sin completar" }}</p>
+    <p><strong>Fecha de nacimiento:</strong> {{ profile.birth_date|default:"Sin completar" }}</p>
+    {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="Avatar" width="150">
+    {% endif %}
+    <p><a href="{% url 'users:profile_edit' %}">Editar perfil</a></p>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ review.title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ review.title }}</h1>
+    <p><strong>Libro:</strong> <a href="{% url 'books:detail' review.book.pk %}">{{ review.book.title }}</a></p>
+    <p><strong>Autor:</strong> {{ review.author.username }}</p>
+    <p><strong>Puntuación:</strong> {{ review.rating }}/5</p>
+    <p>{{ review.content }}</p>
+
+    <h2>Comentarios</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <strong>{{ comment.name }}</strong> — {{ comment.content }}
+                <br><small>{{ comment.created_at }}</small>
+            </li>
+        {% empty %}
+            <li>Todavía no hay comentarios.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Dejar un comentario</h3>
+    <form method="post" action="{% url 'reviews:comment_create' review.pk %}">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Comentar</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Nueva reseña{% endblock %}
+
+{% block content %}
+    <h1>Escribir una reseña</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Publicar</button>
+    </form>
+{% endblock %}
