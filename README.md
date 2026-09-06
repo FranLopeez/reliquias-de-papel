@@ -81,7 +81,7 @@ DEBUG=True
 9. Abrí `http://127.0.0.1:8000/` en el navegador.
 
 ## Estructura del proyecto
-
+```
 Reliquias_de_Papel/
 ├── books/ # Libros, listado, búsqueda, filtros, contacto
 ├── reviews/ # Reseñas y comentarios
@@ -90,7 +90,7 @@ Reliquias_de_Papel/
 ├── build.sh # Script de build para Render
 ├── requirements.txt
 └── manage.py
-
+```
 
 ## Autor
 
