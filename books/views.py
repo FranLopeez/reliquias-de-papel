@@ -33,7 +33,7 @@ class BookListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['genres'] = Book.objects.values_list('genre', flat=True).distinct()
+        context['genres'] = Book.objects.order_by('genre').values_list('genre', flat=True).distinct()
         context['current_query'] = self.request.GET.get('q', '')
         context['current_genre'] = self.request.GET.get('genre', '')
         return context
